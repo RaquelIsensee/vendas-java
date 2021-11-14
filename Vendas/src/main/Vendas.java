@@ -1,8 +1,8 @@
-package ecommerce;
+package main;
 
 import forms.Menu;
 
-public class Ecommerce {
+public class Vendas {
 
     public static void main(String[] args) {
 
