@@ -15,6 +15,7 @@ import javax.swing.GroupLayout;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 public class FCadProduto extends javax.swing.JFrame {
 
@@ -47,6 +48,9 @@ public class FCadProduto extends javax.swing.JFrame {
         textPreco = new JTextField();
         textPreco.setColumns(10);
         
+        textQuantidade = new JTextField();
+        textQuantidade.setColumns(10);
+        
         JButton btnSalvar = new JButton();
         btnSalvar.setText("Salvar");
         
@@ -71,28 +75,36 @@ public class FCadProduto extends javax.swing.JFrame {
 				
 			}
         });
+        
+        JLabel lblQuantidade = new JLabel("Quantidade");
+        
+        textQuantidade = new JTextField();
+        textQuantidade.setColumns(10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         layout.setHorizontalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
-        			.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
-        				.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        				.addGroup(layout.createSequentialGroup()
         					.addGap(82)
         					.addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
         					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         					.addComponent(btnSair, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+        				.addGroup(layout.createSequentialGroup()
         					.addGap(38)
         					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
         						.addComponent(lblPreo)
         						.addComponent(lblDescrio)
-        						.addComponent(lblNome))
+        						.addComponent(lblNome)
+        						.addComponent(lblQuantidade))
         					.addGap(18)
-        					.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
-        						.addComponent(textPreco, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-        						.addComponent(textDescricao)
-        						.addComponent(textNome))))
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(textQuantidade, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        							.addComponent(textPreco, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+        							.addComponent(textDescricao)
+        							.addComponent(textNome)))))
         			.addContainerGap(82, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -110,7 +122,11 @@ public class FCadProduto extends javax.swing.JFrame {
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(lblPreo)
         				.addComponent(textPreco, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addGap(93)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(lblQuantidade)
+        				.addComponent(textQuantidade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(68)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(btnSalvar)
         				.addComponent(btnSair))
@@ -139,13 +155,25 @@ public class FCadProduto extends javax.swing.JFrame {
                 return;
                 
             }
-            Produto produto = new Produto (textNome.getText(), textDescricao.getText(), Double.parseDouble(textPreco.getText()));
+            if (textQuantidade.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Informe a quantidade de produtos a serem registrados");
+                textQuantidade.requestFocus();
+                return;
+            }
+            if (textQuantidade.getText().equals("0")){
+                JOptionPane.showMessageDialog(null, "Informe uma quantidade valida de produtos a serem registrados");
+                textQuantidade.requestFocus();
+                return;
+            }
+            
+            Produto produto = new Produto (textNome.getText(), textDescricao.getText(), Double.parseDouble(textPreco.getText()), Integer.valueOf(textQuantidade.getText()));
             try {
                 servicobancoproduto.insert(produto);
                 JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso");
                 textNome.setText("");
                 textDescricao.setText("");
                 textPreco.setText("");
+                textQuantidade.setText("");
             } catch (SQLException ex) {
                 Logger.getLogger(FCadCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -193,4 +221,5 @@ public class FCadProduto extends javax.swing.JFrame {
     private JTextField textDescricao;
     private JTextField textNome;
     private JTextField textPreco;
+    private JTextField textQuantidade;
 }

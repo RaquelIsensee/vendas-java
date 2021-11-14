@@ -18,7 +18,7 @@ public class ServicoBancoCliente {
         Connection con = conexao.getConexao();
 
         try(PreparedStatement pst = con.prepareStatement(
-                   "insert into clientes(codigo_cliente, nome, cpf, sexo, telefone)" +
+                   "insert into cliente(codigo_cliente, nome, cpf, sexo, telefone)" +
                            "values (0,?,?,?,?)"
            )){
             pst.setString(1, cliente.getNome());
@@ -43,7 +43,7 @@ public class ServicoBancoCliente {
       ArrayList<Cliente> lista = new ArrayList<>();
      try (Statement st = conexao.getConexao().createStatement(); 
             ResultSet rs = st.executeQuery
-             ("select * from clientes order by nome")) {
+             ("select * from cliente order by nome")) {
          
         while (rs.next()){
           lista.add(new Cliente(rs.getInt("codigo_cliente"), rs.getString("nome"), rs.getString("cpf"), rs.getString("sexo"), rs.getString("telefone"), rs.getString("situacao")));
@@ -56,7 +56,7 @@ public class ServicoBancoCliente {
     public void update(Cliente cliente) throws SQLException{
         Connection con = conexao.getConexao();    
         try (PreparedStatement pst = con.prepareStatement
-            ("update clientes set nome = ?, cpf = ?, telefone = ?, sexo = ?, situacao = ? where (codigo_cliente = ?)")) {
+            ("update cliente set nome = ?, cpf = ?, telefone = ?, sexo = ?, situacao = ? where (codigo_cliente = ?)")) {
         pst.setString(1, cliente.getNome());
         pst.setString(2, cliente.getCpf());
         pst.setString(3, cliente.getTelefone());

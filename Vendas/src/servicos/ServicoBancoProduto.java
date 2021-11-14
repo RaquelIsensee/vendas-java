@@ -10,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import classes.Cliente;
 import classes.Produto;
 
 /**
@@ -25,12 +27,13 @@ public class ServicoBancoProduto {
 	        Connection con = conexao.getConexao();
 
 	        try(PreparedStatement pst = con.prepareStatement(
-	                   "insert into produtos(codigo_produto, nome, descricao, preco)" +
-	                           "values (0,?,?,?)"
+	                   "insert into produto (nome, descricao, preco, quantidade)" +
+	                           "values (?,?,?,?)"
 	           )){
 	            pst.setString(1, produto.getNome());
 	            pst.setString(2, produto.getDescricao());
 	            pst.setDouble(3, produto.getPreco());
+	            pst.setDouble(4, produto.getQuantidade());
 	            pst.executeUpdate();
 	         }
 
@@ -44,5 +47,33 @@ public class ServicoBancoProduto {
 	    
 		
 	}
+	 public ArrayList<Produto> getProdutoByLista()throws SQLException{
+	      ArrayList<Produto> lista = new ArrayList<>();
+	     try (Statement st = conexao.getConexao().createStatement(); 
+	            ResultSet rs = st.executeQuery
+	             ("select * from produto order by nome")) {
+	         
+	        while (rs.next()){
+	          lista.add(new Produto(rs.getInt("codigo_produto"), rs.getString("nome"), rs.getString("descricao"), rs.getDouble("preco"), rs.getInt("quantidade")));
+	        }
+	    }
+	    
+	     return lista;
+	 }
+
+	public void update(Produto produto) throws SQLException{
+	        Connection con = conexao.getConexao();    
+	        try (PreparedStatement pst = con.prepareStatement
+	            ("update produto set nome = ?, descricao = ?, preco = ?, quantidade = ? where (codigo_produto = ?)")) {
+	        pst.setString(1, produto.getNome());
+	        pst.setString(2, produto.getDescricao());
+	        pst.setDouble(3, produto.getPreco());
+	        pst.setInt(4, produto.getQuantidade());
+	        pst.setInt(5, produto.getCodigo_produto());
+	        pst.executeUpdate();
+	        }
+	        conexao.close();
+	    }		
+	}
     
-}
+
