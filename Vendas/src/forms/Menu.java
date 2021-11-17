@@ -290,4 +290,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jSair;
     private JMenu jRelatorios;
+    private JMenuItem jConsultClientes_1;
+    private JMenuItem jConsultProdutos_1;
+    private JMenuItem jConsultPedidos_1;
 }
