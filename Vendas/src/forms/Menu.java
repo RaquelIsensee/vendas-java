@@ -9,6 +9,8 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -147,6 +149,22 @@ public class Menu extends javax.swing.JFrame {
         jConsultas.add(jConsultPedidos);
 
         jMenuBar1.add(jConsultas);
+        
+        jRelatorios = new JMenu();
+        jRelatorios.setText("Relatorios");
+        jMenuBar1.add(jRelatorios);
+        
+        jConsultClientes_1 = new JMenuItem();
+        jConsultClientes_1.setText("Clientes");
+        jRelatorios.add(jConsultClientes_1);
+        
+        jConsultProdutos_1 = new JMenuItem();
+        jConsultProdutos_1.setText("Produtos");
+        jRelatorios.add(jConsultProdutos_1);
+        
+        jConsultPedidos_1 = new JMenuItem();
+        jConsultPedidos_1.setText("Pedidos");
+        jRelatorios.add(jConsultPedidos_1);
 
         jSair.setText("Sair");
         jMenuBar1.add(jSair);
@@ -271,4 +289,5 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JFrame jFrame2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jSair;
+    private JMenu jRelatorios;
 }
