@@ -54,6 +54,23 @@ public class Menu extends javax.swing.JFrame {
         jConsultProdutos = new javax.swing.JMenuItem();
         jConsultPedidos = new javax.swing.JMenuItem();
         jSair = new javax.swing.JMenu();
+        jRegistro = new javax.swing.JMenu();
+        jRelatorio= new javax.swing.JMenu();
+
+        jRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+            	jRelatorioMouseClicked(evt);
+            }
+        		
+        jRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+                    public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    	jRegistroMouseClicked(evt);
+                    }
+
+        			private void jSairMouseClicked(MouseEvent evt) {
+        				dispose();				
+        			}
+                });
         
         jSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
