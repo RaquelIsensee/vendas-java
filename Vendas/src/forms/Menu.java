@@ -4,13 +4,6 @@
  * and open the template in the editor.
  */
 package forms;
-import javax.swing.JLabel;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.event.MouseEvent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
 /**
  *
@@ -18,21 +11,21 @@ import javax.swing.JMenuItem;
  */
 public class Menu extends javax.swing.JFrame {
 
-
     /**
-     * Creates new form Menu
+     * Creates new form Menu1
      */
     public Menu() {
         initComponents();
     }
-    
     public FCadCliente fcadcliente;
     public FCadProduto fcadproduto;
     public FCadPedido fcadpedido;
     public FConsultCliente fconsultcliente;
     public FConsultProduto fconsultproduto;
     public FConsultPedido fconsultpedido;
-
+    public FRelatCliente frelatcliente;
+    public FRelatProduto frelatproduto;
+    public FRelatPedido frelatpedido;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,76 +35,24 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
-        jFrame2 = new javax.swing.JFrame();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jCadastros = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
         jCadClientes = new javax.swing.JMenuItem();
         jCadProdutos = new javax.swing.JMenuItem();
         jCadPedidos = new javax.swing.JMenuItem();
-        jConsultas = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jConsultClientes = new javax.swing.JMenuItem();
         jConsultProdutos = new javax.swing.JMenuItem();
         jConsultPedidos = new javax.swing.JMenuItem();
-        jSair = new javax.swing.JMenu();
-        jRegistro = new javax.swing.JMenu();
-        jRelatorio= new javax.swing.JMenu();
-
-        jRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-            	jRelatorioMouseClicked(evt);
-            }
-        		
-        jRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
-                    public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    	jRegistroMouseClicked(evt);
-                    }
-
-        			private void jSairMouseClicked(MouseEvent evt) {
-        				dispose();				
-        			}
-                });
-        
-        jSair.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-            	jSairMouseClicked(evt);
-            }
-
-			private void jSairMouseClicked(MouseEvent evt) {
-				dispose();				
-			}
-        });
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jFrame2Layout = new javax.swing.GroupLayout(jFrame2.getContentPane());
-        jFrame2.getContentPane().setLayout(jFrame2Layout);
-        jFrame2Layout.setHorizontalGroup(
-            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame2Layout.setVerticalGroup(
-            jFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jMenu3 = new javax.swing.JMenu();
+        jRelatClientes = new javax.swing.JMenuItem();
+        jRelatProdutos = new javax.swing.JMenuItem();
+        jRelatPedidos = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jCadastros.setText("Cadastros");
-        jCadastros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCadastrosActionPerformed(evt);
-            }
-        });
+        jMenu1.setText("Cadastros");
 
         jCadClientes.setText("Clientes");
         jCadClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +60,7 @@ public class Menu extends javax.swing.JFrame {
                 jCadClientesActionPerformed(evt);
             }
         });
-        jCadastros.add(jCadClientes);
+        jMenu1.add(jCadClientes);
 
         jCadProdutos.setText("Produtos");
         jCadProdutos.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +68,7 @@ public class Menu extends javax.swing.JFrame {
                 jCadProdutosActionPerformed(evt);
             }
         });
-        jCadastros.add(jCadProdutos);
+        jMenu1.add(jCadProdutos);
 
         jCadPedidos.setText("Pedidos");
         jCadPedidos.addActionListener(new java.awt.event.ActionListener() {
@@ -135,11 +76,11 @@ public class Menu extends javax.swing.JFrame {
                 jCadPedidosActionPerformed(evt);
             }
         });
-        jCadastros.add(jCadPedidos);
+        jMenu1.add(jCadPedidos);
 
-        jMenuBar1.add(jCadastros);
+        jMenuBar1.add(jMenu1);
 
-        jConsultas.setText("Consultas");
+        jMenu2.setText("Consultas");
 
         jConsultClientes.setText("Clientes");
         jConsultClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +88,7 @@ public class Menu extends javax.swing.JFrame {
                 jConsultClientesActionPerformed(evt);
             }
         });
-        jConsultas.add(jConsultClientes);
+        jMenu2.add(jConsultClientes);
 
         jConsultProdutos.setText("Produtos");
         jConsultProdutos.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +96,7 @@ public class Menu extends javax.swing.JFrame {
                 jConsultProdutosActionPerformed(evt);
             }
         });
-        jConsultas.add(jConsultProdutos);
+        jMenu2.add(jConsultProdutos);
 
         jConsultPedidos.setText("Pedidos");
         jConsultPedidos.addActionListener(new java.awt.event.ActionListener() {
@@ -163,51 +104,53 @@ public class Menu extends javax.swing.JFrame {
                 jConsultPedidosActionPerformed(evt);
             }
         });
-        jConsultas.add(jConsultPedidos);
+        jMenu2.add(jConsultPedidos);
 
-        jMenuBar1.add(jConsultas);
-        
-        jRelatorios = new JMenu();
-        jRelatorios.setText("Relatorios");
-        jMenuBar1.add(jRelatorios);
-        
-        jConsultClientes_1 = new JMenuItem();
-        jConsultClientes_1.setText("Clientes");
-        jRelatorios.add(jConsultClientes_1);
-        
-        jConsultProdutos_1 = new JMenuItem();
-        jConsultProdutos_1.setText("Produtos");
-        jRelatorios.add(jConsultProdutos_1);
-        
-        jConsultPedidos_1 = new JMenuItem();
-        jConsultPedidos_1.setText("Pedidos");
-        jRelatorios.add(jConsultPedidos_1);
+        jMenuBar1.add(jMenu2);
 
-        jSair.setText("Sair");
-        jMenuBar1.add(jSair);
+        jMenu3.setText("Relatorios");
+
+        jRelatClientes.setText("Clientes");
+        jRelatClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRelatClientesActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jRelatClientes);
+
+        jRelatProdutos.setText("Produtos");
+        jRelatProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRelatProdutosActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jRelatProdutos);
+
+        jRelatPedidos.setText("Pedidos");
+        jRelatPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRelatPedidosActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jRelatPedidos);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Sair");
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
-        
-        JLabel lblEcommerce = new JLabel("Minha Loja");
-        lblEcommerce.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        lblEcommerce.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addGap(172)
-        			.addComponent(lblEcommerce)
-        			.addContainerGap(182, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(layout.createSequentialGroup()
-        			.addGap(129)
-        			.addComponent(lblEcommerce)
-        			.addContainerGap(150, Short.MAX_VALUE))
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 279, Short.MAX_VALUE)
         );
-        getContentPane().setLayout(layout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -219,23 +162,26 @@ public class Menu extends javax.swing.JFrame {
         fcadproduto.setVisible(true);
     }//GEN-LAST:event_jCadProdutosActionPerformed
 
-    private void jCadPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCadPedidosActionPerformed
-        if (fcadpedido == null){
-            fcadpedido = new FCadPedido();
+    private void jRelatClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRelatClientesActionPerformed
+        if ( frelatcliente == null){
+            frelatcliente = new FRelatCliente();
         }
-        fcadpedido.setVisible(true);
-    }//GEN-LAST:event_jCadPedidosActionPerformed
+        frelatcliente.setVisible(true);
+    }//GEN-LAST:event_jRelatClientesActionPerformed
 
-    private void jCadastrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCadastrosActionPerformed
-
-    }//GEN-LAST:event_jCadastrosActionPerformed
-
-    private void jCadClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCadClientesActionPerformed
-        if (fcadcliente == null){
-            fcadcliente = new FCadCliente();
+    private void jRelatProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRelatProdutosActionPerformed
+        if (frelatproduto == null){
+            frelatproduto = new FRelatProduto();
         }
-        fcadcliente.setVisible(true);
-    }//GEN-LAST:event_jCadClientesActionPerformed
+        frelatproduto.setVisible(true);
+    }//GEN-LAST:event_jRelatProdutosActionPerformed
+
+    private void jRelatPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRelatPedidosActionPerformed
+        if (frelatpedido == null){
+            frelatpedido = new FRelatPedido();
+        }
+        frelatpedido.setVisible(true);
+    }//GEN-LAST:event_jRelatPedidosActionPerformed
 
     private void jConsultClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultClientesActionPerformed
         if (fconsultcliente == null){
@@ -255,8 +201,22 @@ public class Menu extends javax.swing.JFrame {
         if (fconsultpedido == null){
             fconsultpedido = new FConsultPedido();
         }
-        fconsultpedido.setVisible(true);    
+        fconsultpedido.setVisible(true);
     }//GEN-LAST:event_jConsultPedidosActionPerformed
+
+    private void jCadClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCadClientesActionPerformed
+        if (fcadcliente == null){
+            fcadcliente = new FCadCliente();
+        }
+        fcadcliente.setVisible(true);
+    }//GEN-LAST:event_jCadClientesActionPerformed
+
+    private void jCadPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCadPedidosActionPerformed
+        if (fcadpedido == null){
+            fcadpedido = new FCadPedido();
+        }
+        fcadpedido.setVisible(true);
+    }//GEN-LAST:event_jCadPedidosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -284,6 +244,7 @@ public class Menu extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -297,17 +258,16 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jCadClientes;
     private javax.swing.JMenuItem jCadPedidos;
     private javax.swing.JMenuItem jCadProdutos;
-    private javax.swing.JMenu jCadastros;
     private javax.swing.JMenuItem jConsultClientes;
     private javax.swing.JMenuItem jConsultPedidos;
     private javax.swing.JMenuItem jConsultProdutos;
-    private javax.swing.JMenu jConsultas;
-    private javax.swing.JFrame jFrame1;
-    private javax.swing.JFrame jFrame2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jSair;
-    private JMenu jRelatorios;
-    private JMenuItem jConsultClientes_1;
-    private JMenuItem jConsultProdutos_1;
-    private JMenuItem jConsultPedidos_1;
+    private javax.swing.JMenuItem jRelatClientes;
+    private javax.swing.JMenuItem jRelatPedidos;
+    private javax.swing.JMenuItem jRelatProdutos;
+    // End of variables declaration//GEN-END:variables
 }
