@@ -67,4 +67,25 @@ public class ServicoBancoCliente {
         }
         conexao.close();
     }
+    
+    public ArrayList getClienteByListaString() throws SQLException{
+    ArrayList dados = new ArrayList();
+    
+    try (Statement st = conexao.getConexao().createStatement(); 
+            ResultSet rs = st.executeQuery
+             ("select * from cliente order by nome ")) {
+         
+        while (rs.next()){
+          dados.add(new String [] { rs.getString("codigo_cliente"), 
+                                    rs.getString("nome"), 
+                                    rs.getString("cpf"),
+                                    rs.getString("sexo"),
+                                    rs.getString("telefone"),
+                                    rs.getString("situacao")
+                                   }); 
+        }
+    }
+    
+    return dados;           
+  }
 }
