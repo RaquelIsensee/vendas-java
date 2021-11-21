@@ -72,7 +72,25 @@ public class ServicoBancoProduto {
 	        pst.executeUpdate();
 	        }
 	        conexao.close();
-	    }		
+	    }
+	  public ArrayList getProdutoByListaString() throws SQLException{
+		    ArrayList dados = new ArrayList();
+		    
+		    try (Statement st = conexao.getConexao().createStatement(); 
+		            ResultSet rs = st.executeQuery
+		             ("select * from produto order by codigo_produto ")) {
+		         
+		        while (rs.next()){
+		          dados.add(new String [] { rs.getString("codigo_produto"), 
+		                                    rs.getString("nome"), 
+		                                    rs.getString("descricao"),
+		                                    rs.getString("preco"),
+		                                    rs.getString("quantidade")
+		                                   }); 
+		        }
 	}
+			return dados;
+	  }
+}
     
 

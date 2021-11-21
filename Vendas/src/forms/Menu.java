@@ -4,6 +4,15 @@
  * and open the template in the editor.
  */
 package forms;
+import javax.swing.JMenuItem;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JMenu;
+import javax.swing.JLabel;
+import javax.swing.GroupLayout.Alignment;
+import java.awt.Font;
 
 /**
  *
@@ -48,7 +57,6 @@ public class Menu extends javax.swing.JFrame {
         jRelatClientes = new javax.swing.JMenuItem();
         jRelatProdutos = new javax.swing.JMenuItem();
         jRelatPedidos = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -136,21 +144,61 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Sair");
-        jMenuBar1.add(jMenu4);
-
         setJMenuBar(jMenuBar1);
+        
+        jMenu4 = new JMenu("Sair");
+        jMenu4.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				dispose();
+			}
+		});
+        jMenuBar1.add(jMenu4);
+        
+        JLabel lblVendas = new JLabel("Vendas");
+        lblVendas.setFont(new Font("Tahoma", Font.PLAIN, 24));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        	layout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+        			.addGap(175)
+        			.addComponent(lblVendas)
+        			.addContainerGap(179, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+        	layout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+        			.addGap(126)
+        			.addComponent(lblVendas)
+        			.addContainerGap(139, Short.MAX_VALUE))
         );
+        getContentPane().setLayout(layout);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -264,10 +312,9 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jRelatClientes;
     private javax.swing.JMenuItem jRelatPedidos;
     private javax.swing.JMenuItem jRelatProdutos;
-    // End of variables declaration//GEN-END:variables
+    private JMenu jMenu4;
 }
