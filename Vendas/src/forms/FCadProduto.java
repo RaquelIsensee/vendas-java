@@ -15,7 +15,6 @@ import javax.swing.GroupLayout;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
 public class FCadProduto extends javax.swing.JFrame {
 

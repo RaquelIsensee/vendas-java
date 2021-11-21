@@ -1,14 +1,7 @@
 package forms;
 
 import servicos.ServicoBancoCliente;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
-import javax.swing.JComboBox;
-import classes.Cliente;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class FConsultPedido extends javax.swing.JFrame {
     
