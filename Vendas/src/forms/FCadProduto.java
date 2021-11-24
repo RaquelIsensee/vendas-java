@@ -135,7 +135,7 @@ public class FCadProduto extends javax.swing.JFrame {
 
         pack();
     }
-        private void btnSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSalvarMouseClicked
+        private void btnSalvarMouseClicked(java.awt.event.MouseEvent evt) {                                     
             if (textNome.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Informe o nome do produto!");
                 textNome.requestFocus();
@@ -169,7 +169,7 @@ public class FCadProduto extends javax.swing.JFrame {
             try {
                 servicobancoproduto.insert(produto);
                 JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso");
-                textNome.setText("");
+                textNome.setText(""); 
                 textDescricao.setText("");
                 textPreco.setText("");
                 textQuantidade.setText("");
@@ -177,7 +177,7 @@ public class FCadProduto extends javax.swing.JFrame {
                 Logger.getLogger(FCadCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
         
     /**
      * @param args the command line arguments
@@ -214,7 +214,7 @@ public class FCadProduto extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnSair;
     private JTextField textDescricao;

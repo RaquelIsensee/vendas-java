@@ -5,15 +5,27 @@
  */
 package forms;
 
+import classes.Cliente;
+import classes.Pedido;
+import classes.Produto;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import servicos.ServicoBancoCliente;
+import servicos.ServicoBancoPedido;
+import servicos.ServicoBancoProduto;
+
 /**
  *
  * @author matheus.aviz
  */
 public class FCadPedido extends javax.swing.JFrame {
-
-    /**
-     * Creates new form FCadPedido
-     */
+ ServicoBancoCliente servicobancocliente = new ServicoBancoCliente();
+ ServicoBancoProduto servicobancoproduto=new ServicoBancoProduto();
+   ServicoBancoPedido servicobancopedido = new ServicoBancoPedido();
+   
     public FCadPedido() {
         initComponents();
     }
@@ -27,21 +39,186 @@ public class FCadPedido extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        cbxCliente = new javax.swing.JComboBox<>();
+        cbxProduto = new javax.swing.JComboBox<>();
+        txtQuantidade = new javax.swing.JTextField();
+        jbCliente = new javax.swing.JLabel();
+        jbProduto = new javax.swing.JLabel();
+        jbQuantidade = new javax.swing.JLabel();
+        btnSalvar = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
+
+        cbxCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxClienteActionPerformed(evt);
+            }
+        });
+
+        cbxProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxProdutoActionPerformed(evt);
+            }
+        });
+
+        jbCliente.setText("Cliente ");
+
+        jbProduto.setText("Produto");
+
+        jbQuantidade.setText("Quantidade");
+
+        btnSalvar.setText("Salvar");
+        btnSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalvarMouseClicked(evt);
+            }
+        });
+
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jbCliente)
+                        .addComponent(jbProduto))
+                    .addComponent(jbQuantidade))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cbxProduto, javax.swing.GroupLayout.Alignment.TRAILING, 0, 314, Short.MAX_VALUE)
+                        .addComponent(txtQuantidade, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(cbxCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77)
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbCliente))
+                        .addGap(28, 28, 28)
+                        .addComponent(cbxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbProduto, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbQuantidade))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnSair))
+                .addGap(67, 67, 67))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cbxClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxClienteActionPerformed
+       
+    }//GEN-LAST:event_cbxClienteActionPerformed
+
+    private void cbxProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProdutoActionPerformed
+        
+    }//GEN-LAST:event_cbxProdutoActionPerformed
+
+    private void btnSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarMouseClicked
+        Cliente cliente = (Cliente) cbxCliente.getSelectedItem();
+        Produto produto = (Produto) cbxProduto.getSelectedItem();
+
+        if (txtQuantidade.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Informe a quantidade");
+            txtQuantidade.requestFocus();
+            return;
+        }
+        if(Integer.parseInt(txtQuantidade.getText()) > produto.getQuantidade()){
+            JOptionPane.showMessageDialog(null, "Não é possivel comprar mais que a quantidade disponivel");
+            txtQuantidade.requestFocus();
+            return;
+        }
+
+        double valorProduto = produto.getPreco();
+        valorProduto *= Double.parseDouble(txtQuantidade.getText());
+
+        Pedido pedido = new Pedido(cliente.getCodigoCliente());
+
+        try {
+            servicobancopedido.insert(pedido, produto,Integer.parseInt(txtQuantidade.getText()),String.valueOf(valorProduto));
+            JOptionPane.showMessageDialog(null, "Pedido cadastrado com sucesso");
+        } catch (SQLException ex) {
+            Logger.getLogger(FCadPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnSalvarMouseClicked
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        atualizarListaCliente();
+      atualizarListaProduto();
+    }//GEN-LAST:event_formWindowActivated
+
+    
+     private void atualizarListaProduto(){
+        try{
+        if(cbxProduto.getItemCount()>0){
+            cbxProduto.removeAllItems();
+        }
+        ArrayList<Produto> lista = servicobancoproduto.getProdutoByLista();
+        
+        for (Produto a:lista){
+                cbxProduto.addItem(a);
+            }  
+        
+        }catch
+        (SQLException ex) {
+                Logger.getLogger(FCadPedido.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+      private void atualizarListaCliente(){
+        try {
+            if (cbxCliente.getItemCount() > 0){
+               cbxCliente.removeAllItems();
+        }
+        
+            ArrayList<Cliente> lista = servicobancocliente.getClienteByLista();
+        
+         
+          
+            for (Cliente u:lista){
+                cbxCliente.addItem(u);
+            }      
+
+
+            } catch (SQLException ex) {
+                Logger.getLogger(FConsultCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }        
+    }
 
     /**
      * @param args the command line arguments
@@ -79,5 +256,13 @@ public class FCadPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<Cliente> cbxCliente;
+    private javax.swing.JComboBox<Produto> cbxProduto;
+    private javax.swing.JLabel jbCliente;
+    private javax.swing.JLabel jbProduto;
+    private javax.swing.JLabel jbQuantidade;
+    private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
 }
