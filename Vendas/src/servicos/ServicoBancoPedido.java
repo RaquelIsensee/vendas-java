@@ -7,13 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ServicoBancoPedido {
 
     private final Conexao conexao = new Conexao();
-
-    public void insert(Pedido pedido, Produto produto, int quantidade, String preco) throws SQLException {
+    public void insert(ArrayList<ServicoPedido> servicopedido) throws SQLException {
 
         Connection con = conexao.getConexao();
 
@@ -21,31 +21,34 @@ public class ServicoBancoPedido {
                 "insert into pedido(numero_pedido,codigo_cliente)"
                 + "values (0,?)"
         )) {
-            pst.setInt(1, pedido.getNumero_pedido());
+            pst.setInt(1, servicopedido.get(0).getPedido().getCodigo_cliente());
             pst.executeUpdate();
         }
-        Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery("select last_insert_id()");
+        for (int i= 0; servicopedido.size() > i; i++){
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select last_insert_id()");
 
-        update(produto, quantidade);
+            update(servicopedido.get(i).getProduto(), servicopedido.get(i).getQuantidade());
 
-        if (rs.next()) {
-            pedido.setNumero_pedido(rs.getInt(1));
+            if (rs.next()) {
+                servicopedido.get(i).getPedido().setNumero_pedido(rs.getInt(1));
+            }
+            try (PreparedStatement pst = con.prepareStatement(
+                    "insert into pedido_has_produto(quantidade,preco,data,numero_pedido,codigo_produto)"
+                    + "values (?,?,?,?,?)"
+            )) {
+                Date data = new Date(System.currentTimeMillis());
+
+                pst.setInt(1, servicopedido.get(i).getQuantidade());
+                pst.setDouble(2, servicopedido.get(i).getPreco());
+                pst.setString(3, data.toString());
+                pst.setInt(4, servicopedido.get(i).getPedido().getNumero_pedido());
+                pst.setInt(5, servicopedido.get(i).getProduto().getCodigo_produto());
+                //Executa o codigo acima
+                pst.executeUpdate();
+            }
         }
-        try (PreparedStatement pst = con.prepareStatement(
-                "insert into pedido_has_produto(quantidade,preco,data,numero_pedido,codigo_produto)"
-                + "values (?,?,?,?,?)"
-        )) {
-            Date data = new Date(System.currentTimeMillis());
-
-            pst.setInt(1, quantidade);
-            pst.setString(2, preco);
-            pst.setString(3, data.toString());
-            pst.setInt(4, pedido.getNumero_pedido());
-            pst.setInt(5, produto.getCodigo_produto());
-            //Executa o codigo acima
-            pst.executeUpdate();
-        }
+        
 
         conexao.close();
     }

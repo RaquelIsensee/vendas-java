@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import servicos.ServicoBancoCliente;
 import servicos.ServicoBancoPedido;
 import servicos.ServicoBancoProduto;
+import servicos.ServicoPedido;
 
 /**
  *
@@ -24,12 +25,18 @@ import servicos.ServicoBancoProduto;
 public class FCadPedido extends javax.swing.JFrame {
  ServicoBancoCliente servicobancocliente = new ServicoBancoCliente();
  ServicoBancoProduto servicobancoproduto=new ServicoBancoProduto();
-   ServicoBancoPedido servicobancopedido = new ServicoBancoPedido();
+ ServicoBancoPedido servicobancopedido = new ServicoBancoPedido();
+ ArrayList<ServicoPedido> lista_pedido = new ArrayList<>();
    
     public FCadPedido() {
         initComponents();
     }
 
+    public void limparTela(){
+        cbxProduto.setSelectedIndex(-1);
+        txtQuantidade.setText("");
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,6 +54,7 @@ public class FCadPedido extends javax.swing.JFrame {
         jbQuantidade = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
+        jAdicionarNovoProduto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -87,6 +95,18 @@ public class FCadPedido extends javax.swing.JFrame {
             }
         });
 
+        jAdicionarNovoProduto.setText("Adicionar novo Produto");
+        jAdicionarNovoProduto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jAdicionarNovoProdutoMouseClicked(evt);
+            }
+        });
+        jAdicionarNovoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAdicionarNovoProdutoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,20 +114,25 @@ public class FCadPedido extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jbCliente)
-                        .addComponent(jbProduto))
-                    .addComponent(jbQuantidade))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(cbxProduto, javax.swing.GroupLayout.Alignment.TRAILING, 0, 314, Short.MAX_VALUE)
-                        .addComponent(txtQuantidade, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(cbxCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jbCliente)
+                                .addComponent(jbProduto))
+                            .addComponent(jbQuantidade))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbxProduto, javax.swing.GroupLayout.Alignment.TRAILING, 0, 314, Short.MAX_VALUE)
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cbxCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(77, 77, 77)
-                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jAdicionarNovoProduto)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 20, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -129,7 +154,8 @@ public class FCadPedido extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
-                    .addComponent(btnSair))
+                    .addComponent(btnSair)
+                    .addComponent(jAdicionarNovoProduto))
                 .addGap(67, 67, 67))
         );
 
@@ -148,6 +174,7 @@ public class FCadPedido extends javax.swing.JFrame {
         Cliente cliente = (Cliente) cbxCliente.getSelectedItem();
         Produto produto = (Produto) cbxProduto.getSelectedItem();
 
+
         if (txtQuantidade.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Informe a quantidade");
             txtQuantidade.requestFocus();
@@ -163,10 +190,19 @@ public class FCadPedido extends javax.swing.JFrame {
         valorProduto *= Double.parseDouble(txtQuantidade.getText());
 
         Pedido pedido = new Pedido(cliente.getCodigoCliente());
-
+        ServicoPedido servicopedido = new ServicoPedido(pedido, Integer.parseInt(txtQuantidade.getText()), valorProduto, produto);
+        lista_pedido.add(servicopedido);
         try {
-            servicobancopedido.insert(pedido, produto,Integer.parseInt(txtQuantidade.getText()),String.valueOf(valorProduto));
+            servicobancopedido.insert(lista_pedido);
             JOptionPane.showMessageDialog(null, "Pedido cadastrado com sucesso");
+            txtQuantidade.setText("");
+            cbxCliente.setSelectedIndex(-1);
+            cbxCliente.setEnabled(true);
+            cbxProduto.setSelectedIndex(-1);
+            if (cbxProduto.getItemCount() == 1){
+                jAdicionarNovoProduto.setVisible(false);
+            } else{jAdicionarNovoProduto.setVisible(true);};
+                
         } catch (SQLException ex) {
             Logger.getLogger(FCadPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -180,7 +216,41 @@ public class FCadPedido extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         atualizarListaCliente();
       atualizarListaProduto();
+      cbxCliente.setSelectedIndex(-1);
+      cbxProduto.setSelectedIndex(-1);
+    if (cbxProduto.getItemCount() == 1){
+        jAdicionarNovoProduto.setVisible(false);
+    }
     }//GEN-LAST:event_formWindowActivated
+
+    private void jAdicionarNovoProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jAdicionarNovoProdutoMouseClicked
+        Cliente cliente = (Cliente) cbxCliente.getSelectedItem();
+        Produto produto = (Produto) cbxProduto.getSelectedItem();
+        if (txtQuantidade.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Informe a quantidade");
+            txtQuantidade.requestFocus();
+            return;
+        }
+        if(Integer.parseInt(txtQuantidade.getText()) > produto.getQuantidade()){
+            JOptionPane.showMessageDialog(null, "Não é possivel comprar mais que a quantidade disponivel");
+            txtQuantidade.requestFocus();
+            return;
+        }
+        double valorProduto = produto.getPreco();
+        cbxProduto.removeItemAt(cbxProduto.getSelectedIndex());
+        if (cbxProduto.getItemCount() == 1){
+            jAdicionarNovoProduto.setVisible(false);
+        } 
+        Pedido pedido = new Pedido(cliente.getCodigoCliente());
+        ServicoPedido servicopedido = new ServicoPedido(pedido, Integer.parseInt(txtQuantidade.getText()), valorProduto, produto);
+        lista_pedido.add(servicopedido);
+        this.limparTela();
+        cbxCliente.setEnabled(false);
+    }//GEN-LAST:event_jAdicionarNovoProdutoMouseClicked
+
+    private void jAdicionarNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAdicionarNovoProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jAdicionarNovoProdutoActionPerformed
 
     
      private void atualizarListaProduto(){
@@ -191,7 +261,10 @@ public class FCadPedido extends javax.swing.JFrame {
         ArrayList<Produto> lista = servicobancoproduto.getProdutoByLista();
         
         for (Produto a:lista){
+            if (a.getQuantidade() > 0){
                 cbxProduto.addItem(a);
+            }
+                
             }  
         
         }catch
@@ -210,9 +283,11 @@ public class FCadPedido extends javax.swing.JFrame {
         
          
           
-            for (Cliente u:lista){
-                cbxCliente.addItem(u);
-            }      
+            lista.forEach((u) -> {
+                if("Ativo".equals(u.getSituacao())){
+                    cbxCliente.addItem(u);
+                }
+            });      
 
 
             } catch (SQLException ex) {
@@ -260,6 +335,7 @@ public class FCadPedido extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<Cliente> cbxCliente;
     private javax.swing.JComboBox<Produto> cbxProduto;
+    private javax.swing.JButton jAdicionarNovoProduto;
     private javax.swing.JLabel jbCliente;
     private javax.swing.JLabel jbProduto;
     private javax.swing.JLabel jbQuantidade;
