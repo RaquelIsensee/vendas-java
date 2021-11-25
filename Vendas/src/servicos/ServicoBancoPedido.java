@@ -16,14 +16,15 @@ public class ServicoBancoPedido {
     public void insert(ArrayList<ServicoPedido> servicopedido) throws SQLException {
 
         Connection con = conexao.getConexao();
-
+        float valor_total = 0;
         try (PreparedStatement pst = con.prepareStatement(
-                "insert into pedido(numero_pedido,codigo_cliente)"
-                + "values (0,?)"
-        )) {
+            "insert into pedido(numero_pedido,codigo_cliente)"
+            + "values (0,?)"
+            )) {
             pst.setInt(1, servicopedido.get(0).getPedido().getCodigo_cliente());
             pst.executeUpdate();
         }
+
         for (int i= 0; servicopedido.size() > i; i++){
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select last_insert_id()");
@@ -47,7 +48,15 @@ public class ServicoBancoPedido {
                 //Executa o codigo acima
                 pst.executeUpdate();
             }
+            valor_total += servicopedido.get(i).getPreco();
         }
+        try (PreparedStatement pst = con.prepareStatement(
+            "UPDATE pedido set valor_total = ? WHERE numero_pedido= ?")) {
+            pst.setFloat(1, valor_total);
+            pst.setInt(2, servicopedido.get(0).getPedido().getNumero_pedido());
+            pst.executeUpdate();
+        }
+
         
 
         conexao.close();

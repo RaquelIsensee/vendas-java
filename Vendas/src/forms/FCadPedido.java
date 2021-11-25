@@ -214,7 +214,7 @@ public class FCadPedido extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        atualizarListaCliente();
+      atualizarListaCliente();
       atualizarListaProduto();
       cbxCliente.setSelectedIndex(-1);
       cbxProduto.setSelectedIndex(-1);
