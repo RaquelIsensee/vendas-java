@@ -45,7 +45,6 @@ public class ServicoBancoPedido {
                 pst.setString(3, data.toString());
                 pst.setInt(4, servicopedido.get(i).getPedido().getNumero_pedido());
                 pst.setInt(5, servicopedido.get(i).getProduto().getCodigo_produto());
-                //Executa o codigo acima
                 pst.executeUpdate();
             }
             valor_total += servicopedido.get(i).getPreco();
@@ -71,4 +70,26 @@ public class ServicoBancoPedido {
         }
         conexao.close();
     }
+    
+    public ArrayList getClienteByListaString() throws SQLException{
+    ArrayList dados = new ArrayList();
+    
+    try (Statement st = conexao.getConexao().createStatement(); 
+            ResultSet rs = st.executeQuery
+             ("SELECT b.numero_pedido,b.quantidade,a.nome,b.preco,b.data,c.codigo_cliente,c.valor_total FROM ecommerce.produto a INNER JOIN ecommerce.pedido_has_produto b ON a.codigo_produto=b.codigo_produto INNER JOIN ecommerce.pedido c ON b.numero_pedido=c.numero_pedido")) {
+         
+        while (rs.next()){
+          dados.add(new String [] { rs.getString("numero_pedido"),
+                                    rs.getString("quantidade"),
+                                    rs.getString("nome"),
+                                    rs.getString("preco"),
+                                    rs.getString("data"),
+                                    rs.getString(("codigo_cliente")),
+                                    rs.getString("valor_total")
+                                   }); 
+        }
+    }
+    
+    return dados;           
+  }
 }
