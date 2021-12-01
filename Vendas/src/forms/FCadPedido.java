@@ -199,6 +199,7 @@ public class FCadPedido extends javax.swing.JFrame {
             cbxCliente.setSelectedIndex(-1);
             cbxCliente.setEnabled(true);
             cbxProduto.setSelectedIndex(-1);
+            lista_pedido.clear();
             if (cbxProduto.getItemCount() == 1){
                 jAdicionarNovoProduto.setVisible(false);
             } else{jAdicionarNovoProduto.setVisible(true);};
@@ -237,6 +238,7 @@ public class FCadPedido extends javax.swing.JFrame {
             return;
         }
         double valorProduto = produto.getPreco();
+        valorProduto *= Double.parseDouble(txtQuantidade.getText());
         cbxProduto.removeItemAt(cbxProduto.getSelectedIndex());
         if (cbxProduto.getItemCount() == 1){
             jAdicionarNovoProduto.setVisible(false);
