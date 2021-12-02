@@ -5,6 +5,7 @@
  */
 package servicos;
 
+import classes.Pedido;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -73,7 +74,19 @@ public class ServicoBancoProduto {
 	        }
 	        conexao.close();
 	    }
-	  public ArrayList getProdutoByListaString() throws SQLException{
+        
+	public void update_produto_pedido(Produto produto, Pedido pedido) throws SQLException{
+	        Connection con = conexao.getConexao();    
+	        try (PreparedStatement pst = con.prepareStatement
+	            ("update pedido_has_produto set quantidade = ? where codigo_produto = ? and numero_pedido = ?")) {
+	        pst.setInt(1, produto.getQuantidade());
+	        pst.setInt(2, produto.getCodigo_produto());
+	        pst.setInt(3, pedido.getNumero_pedido());
+	        pst.executeUpdate();
+	        }
+	        conexao.close();
+	    }        
+        public ArrayList getProdutoByListaString() throws SQLException{
 		    ArrayList dados = new ArrayList();
 		    
 		    try (Statement st = conexao.getConexao().createStatement(); 

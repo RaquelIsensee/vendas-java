@@ -5,6 +5,14 @@ public class Produto {
    private String nome, descricao;
    private double preco;
 
+public Produto(int codigo_produto, int quantidade, String nome) {
+      this.codigo_produto = codigo_produto;
+      this.quantidade = quantidade;
+      this.nome = nome;
+    }
+
+
+
 public Produto(String nome, String descricao, double preco, int quantidade) {
     this.setNome(nome);
     this.setDescricao(descricao);

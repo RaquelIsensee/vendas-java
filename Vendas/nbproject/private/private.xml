@@ -2,6 +2,17 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/matheus.aviz/Documents/Trabalho/vendas-java/Vendas/src/servicos/ServicoPedido.java</file>
+            <file>file:/C:/Users/matheus.aviz/Documents/Trabalho/vendas-java/Vendas/src/servicos/Conexao.java</file>
+            <file>file:/C:/Users/matheus.aviz/Documents/Trabalho/vendas-java/Vendas/src/servicos/ServicoBancoPedido.java</file>
+            <file>file:/C:/Users/matheus.aviz/Documents/Trabalho/vendas-java/Vendas/src/forms/FConsultPedido.java</file>
+            <file>file:/C:/Users/matheus.aviz/Documents/Trabalho/vendas-java/Vendas/src/servicos/ServicoBancoCliente.java</file>
+            <file>file:/C:/Users/matheus.aviz/Documents/Trabalho/vendas-java/Vendas/src/servicos/ServicoBancoProduto.java</file>
+            <file>file:/C:/Users/matheus.aviz/Documents/Trabalho/vendas-java/Vendas/src/forms/FConsultCliente.java</file>
+            <file>file:/C:/Users/matheus.aviz/Documents/Trabalho/vendas-java/Vendas/src/forms/FConsultProduto.java</file>
+            <file>file:/C:/Users/matheus.aviz/Documents/Trabalho/vendas-java/Vendas/src/classes/Pedido.java</file>
+            <file>file:/C:/Users/matheus.aviz/Documents/Trabalho/vendas-java/Vendas/src/classes/Produto.java</file>
+        </group>
     </open-files>
 </project-private>

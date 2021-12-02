@@ -92,4 +92,32 @@ public class ServicoBancoPedido {
     
     return dados;           
   }
+    
+    public ArrayList getProdutosPedidoByLista(Pedido pedido) throws SQLException{
+    ArrayList<Produto> dados = new ArrayList<>();
+    
+    try (Statement st = conexao.getConexao().createStatement(); 
+            ResultSet rs = st.executeQuery
+             ("SELECT b.codigo_produto, b.quantidade, a.nome FROM ecommerce.produto a INNER JOIN ecommerce.pedido_has_produto b ON a.codigo_produto=b.codigo_produto where numero_pedido = " + pedido.getNumero_pedido())) {
+         
+        while (rs.next()){
+          dados.add(new Produto(rs.getInt("codigo_produto"), rs.getInt("quantidade"), rs.getString("nome"))); 
+        }
+    }
+    
+    return dados;           
+  } 
+    public ArrayList getPedidoByLista() throws SQLException{
+      ArrayList<Pedido> lista = new ArrayList<>();
+     try (Statement st = conexao.getConexao().createStatement(); 
+            ResultSet rs = st.executeQuery
+             ("select * from pedido order by numero_pedido")) {
+         
+        while (rs.next()){
+          lista.add(new Pedido(rs.getInt("numero_pedido"), rs.getInt("codigo_cliente")));
+        }
+    }
+    
+     return lista;
+    }
 }
